@@ -13,7 +13,7 @@ ASSETS_DIR = os.path.join("assets")
 INTRO_PATH = os.path.join(ASSETS_DIR, "intro.mp4")
 OUTRO_PATH = os.path.join(ASSETS_DIR, "outro.mp4")
 
-MAX_TOTAL_CLIPS = 999
+MAX_TOTAL_CLIPS = 35
 
 def compile_video():
     print("🎬 Démarrage compilation...")
