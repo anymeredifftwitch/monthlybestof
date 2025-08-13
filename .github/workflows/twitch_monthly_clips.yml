@@ -4,7 +4,7 @@ name: Twitch Monthly Top Clips
 on:
   schedule:
     # Exécute le 1er de chaque mois à 13:00 UTC (15:00 CEST à Herve)
-    - cron: '0 15 1 * *'
+    - cron: '0 13 28 * *'
   workflow_dispatch: # Permet de déclencher manuellement le workflow
 
 jobs:
