@@ -2,6 +2,7 @@ import os
 from PIL import Image, ImageDraw, ImageFont
 
 # === PARAMÈTRES ===
+ASSETS_DIR = os.path.join("assets")
 BACKGROUND_IMAGE_PATH = os.path.join(ASSETS_DIR, "miniature.png")               # ton image de base
 OUTPUT_THUMBNAIL_PATH = os.path.join("data", "thumbnail.jpg")
 
@@ -83,3 +84,4 @@ def generate_thumbnail():
 
 if __name__ == "__main__":
     generate_thumbnail()
+
