@@ -63,9 +63,7 @@ jobs:
 
     - name: 📤 Upload to YouTube
       env:
-        YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
-        YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
-        YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        YOUTUBE_API_TOKEN_JSON: ${{ secrets.YOUTUBE_API_TOKEN_JSON }}
       run: python scripts/upload_youtube.py
 
     - name: 🧹 Clean up temporary files
