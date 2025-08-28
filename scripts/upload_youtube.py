@@ -13,7 +13,7 @@ from googleapiclient.http import MediaFileUpload
 SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
 
 # --- Paramètres globaux ---
-ENABLE_UPLOAD = False  # ⚠️ Mets False pour désactiver l'upload pendant les tests
+ENABLE_UPLOAD = True  # ⚠️ Mets False pour désactiver l'upload pendant les tests
 PLAYLIST_NAME = "BestOfduMois"
 
 # Chemins fichiers
@@ -160,3 +160,4 @@ def get_or_create_playlist(youtube, playlist_name):
 
 if __name__ == "__main__":
     upload_video()
+
