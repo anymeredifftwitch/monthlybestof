@@ -79,9 +79,8 @@ def generate_thumbnail():
     draw_text_with_outline(draw, (X2, Y2), get_current_month_fr_upper(), font_main, WHITE, TWITCH_PURPLE, outline_width=4)
 
     # Sauvegarde
-    img.save(OUTPUT_THUMBNAIL_PATH)
+    img.convert("RGB").save(OUTPUT_THUMBNAIL_PATH)
     print(f"✅ Miniature générée : {OUTPUT_THUMBNAIL_PATH}")
 
 if __name__ == "__main__":
     generate_thumbnail()
-
