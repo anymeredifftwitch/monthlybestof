@@ -9,11 +9,11 @@ from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 
-# Scopes requis pour l'upload de vidéo
-SCOPES = ["https://www.googleapis.com/auth/youtube.upload", "https://www.googleapis.com/auth/youtube"]
+# Scope requis pour l'upload de vidéo
+SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
 
 # --- Paramètres globaux ---
-ENABLE_UPLOAD = True  # ⚠️ Mets False pour désactiver l'upload pendant les tests
+ENABLE_UPLOAD = False  # ⚠️ Mets False pour désactiver l'upload pendant les tests
 PLAYLIST_NAME = "BestOfduMois"
 
 # Chemins fichiers
@@ -58,21 +58,22 @@ def upload_video():
         cleaned_final_title = "Le meilleur des clips Twitch du Jour"
 
     title = cleaned_final_title
-
     category_id = metadata.get("category_id", "20")
     privacy_status = metadata.get("privacyStatus", "public")
 
-    # Authentification
-    creds = Credentials(
-        token=None,
-        refresh_token=os.getenv('YOUTUBE_REFRESH_TOKEN'),
-        token_uri="https://oauth2.googleapis.com/token",
-        client_id=os.getenv('YOUTUBE_CLIENT_ID'),
-        client_secret=os.getenv('YOUTUBE_CLIENT_SECRET'),
-        scopes=SCOPES
-    )
+    # --- Authentification avec token JSON depuis GitHub Secret ---
+    token_json = os.getenv("YOUTUBE_API_TOKEN_JSON")
+    if not token_json:
+        print("❌ Le secret YOUTUBE_API_TOKEN_JSON n'est pas défini.")
+        sys.exit(1)
 
-    creds.refresh(Request())
+    creds_data = json.loads(token_json)
+    creds = Credentials.from_authorized_user_info(creds_data, scopes=SCOPES)
+
+    # Rafraîchir si nécessaire
+    if creds.expired and creds.refresh_token:
+        creds.refresh(Request())
+
     youtube = build("youtube", "v3", credentials=creds)
 
     # Vérification vidéo et miniature
@@ -159,4 +160,3 @@ def get_or_create_playlist(youtube, playlist_name):
 
 if __name__ == "__main__":
     upload_video()
-
